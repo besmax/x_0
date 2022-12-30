@@ -3,6 +3,7 @@ package besmax.app;
 import besmax.console.Console;
 import besmax.console.DefaultConsole;
 
+import java.util.InputMismatchException;
 import java.util.Random;
 
 public class App {
@@ -14,11 +15,7 @@ public class App {
     Playground playground = Playground.PLAYGROUND_INSTANCE;
 
     public void run() {
-        console.print("Введите желаемый размер поля. Например, 3 - для создания поля 3х3");
-        playground.setSize(console.readNumber());
-        playground.prepareFieldForGame();
-        console.print(playground.showCurrentPlayground());
-
+        setSizeAndPrepareField();
         for (int i = 1; i <= playground.getSize()*playground.getSize() / 2; i++) {
             console.print("Введите номер ячейки для хода");
             makeUserMove(console.readNumber());
@@ -28,7 +25,6 @@ public class App {
                 break;
             }
             console.print(playground.showCurrentPlayground());
-            console.print("Мой ход");
             makeComputerMove();
             if (playground.doWeHaveWinner(userSymbol)) {
                 console.print("В этой игре победил: " + playground.getWinnerOfTheGame());
@@ -36,6 +32,24 @@ public class App {
                 break;
             }
         }
+    }
+
+    public void setSizeAndPrepareField() {
+        console.print("Введите желаемый размер поля. Например, 3 - для создания поля 3х3");
+        int inputSize = 0;
+        while (true) {
+            try {
+                inputSize = console.readNumber();
+                break;
+
+            } catch (InputMismatchException e) {
+                console.print("Неккоректно введено число, попробуйте ещё раз");
+            }
+        }
+        playground.setSize(inputSize);
+        playground.prepareFieldForGame();
+        console.print(playground.showCurrentPlayground());
+
     }
 
     public void makeUserMove(int positionNumber) {
@@ -48,6 +62,7 @@ public class App {
     }
 
     public void makeComputerMove() {
+        console.print("Мой ход");
         while (!playground.occupyPositionOnTheField(new Random().nextInt(9) + 1, computerSymbol));
         console.print(playground.showCurrentPlayground());
     }

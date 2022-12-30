@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.*;
 import java.math.BigInteger;
+import java.util.InputMismatchException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -20,8 +21,7 @@ public class DefaultConsoleTest {
     }
 
     @Test
-    void consoleReadInt() {
-       // InputStream input = new ByteArrayInputStream(BigInteger.valueOf(7).toByteArray());
+    void consoleReadTextReturnCorrectString() {
         InputStream input = new ByteArrayInputStream("7".getBytes());
         System.setIn(input);
         String actual = consoleTest.readText();
@@ -29,4 +29,5 @@ public class DefaultConsoleTest {
         assertEquals("7", actual);
         System.setIn(System.in);
     }
+
 }

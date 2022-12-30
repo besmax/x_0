@@ -47,11 +47,11 @@ public enum Playground {
          }
     }
 
-    private boolean doWeHaveWinner(char winner) {
+    public boolean doWeHaveWinner(char userSymbol) {
         boolean result = false;
         List<Integer> winnerPositions = new ArrayList<>();
         field.forEach((key, val) -> {
-            if (val.equals(winner) || val.equals(winner)) winnerPositions.add(key);
+            if (val.equals(userSymbol) || val.equals(userSymbol)) winnerPositions.add(key);
         });
 
         if (winnerPositions.size() < size) result = false;
@@ -63,8 +63,8 @@ public enum Playground {
                 (winnerPositions.contains(3) && winnerPositions.contains(6) && winnerPositions.contains(9)) ||
                 (winnerPositions.contains(1) && winnerPositions.contains(5) && winnerPositions.contains(9)) ||
                 (winnerPositions.contains(3) && winnerPositions.contains(5) && winnerPositions.contains(7)) ) {
-            if (winner == 'x' && winner == 'X') winnerOfTheGame = "user";
-            if (winner == '0' ) winnerOfTheGame = "AI";
+            if (userSymbol == 'x' || userSymbol == 'X') winnerOfTheGame = "игрок";
+            if (userSymbol == '0' ) winnerOfTheGame = "компьютер";
             result = true;
         }
         return result;
@@ -72,5 +72,13 @@ public enum Playground {
 
     public void setSize(int size) {
         this.size = size;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public String getWinnerOfTheGame() {
+        return winnerOfTheGame;
     }
 }

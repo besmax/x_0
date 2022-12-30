@@ -3,9 +3,12 @@ package besmax.app;
 import besmax.console.Console;
 import besmax.console.DefaultConsole;
 
+import java.util.Random;
+
 public class App {
 
     private char userSymbol = 'X';
+    private char computerSymbol = '0';
 
     private Console console = new DefaultConsole();
     Playground playground = Playground.PLAYGROUND_INSTANCE;
@@ -25,7 +28,13 @@ public class App {
                 break;
             }
             console.print(playground.showCurrentPlayground());
-
+            console.print("Мой ход");
+            makeComputerMove();
+            if (playground.doWeHaveWinner(userSymbol)) {
+                console.print("В этой игре победил: " + playground.getWinnerOfTheGame());
+                console.print(playground.showCurrentPlayground());
+                break;
+            }
         }
     }
 
@@ -36,6 +45,11 @@ public class App {
         else {
             console.print("Смотри куда ставишь, клетка занята!");
         }
+    }
+
+    public void makeComputerMove() {
+        while (!playground.occupyPositionOnTheField(new Random().nextInt(9) + 1, computerSymbol));
+        console.print(playground.showCurrentPlayground());
     }
 
 }

@@ -49,12 +49,18 @@ public enum Playground {
 
     public boolean checkTheRowsForWinner(char winnerSymbol) {
         boolean result = false;
-        for (int i = 1; i <= field.size(); i += size) {
-            if (field.get(i) == winnerSymbol && field.get(i+1) == winnerSymbol && field.get(i+2) == winnerSymbol) {
+        int elementNumber = 1;
+        for (int i = 1; i <= size; i ++) {
+            Set<Character> uniqueSymbolsInRow = new HashSet<>();
+           for (int j = 1; j <= size; j++){
+               uniqueSymbolsInRow.add(field.get(elementNumber));
+               elementNumber++;
+               }
+            if (uniqueSymbolsInRow.size() == 1 && !uniqueSymbolsInRow.contains('A')) {
                 result = true;
-                if (winnerSymbol == 'x' || winnerSymbol == 'X') winnerOfTheGame = "игрок";
-                if (winnerSymbol == '0' ) winnerOfTheGame = "компьютер";
-            }
+                if (uniqueSymbolsInRow.contains('0')) winnerOfTheGame = "компьютер (строка)";
+                if (uniqueSymbolsInRow.contains('x') || uniqueSymbolsInRow.contains('X')) winnerOfTheGame = "игрок (строка)";
+           }
         }
         return result;
     }
@@ -62,10 +68,17 @@ public enum Playground {
     public boolean checkTheColumnsForWinner(char winnerSymbol) {
         boolean result = false;
         for (int i = 1; i <= size; i ++) {
-            if (field.get(i) == winnerSymbol && field.get(i+size) == winnerSymbol && field.get(i+size+size) == winnerSymbol) {
+            Set<Character> uniqueSymbolsInColumn = new HashSet<>();
+            int elementNumber = i;
+            for (int j = 1; j <= size; j++) {
+                uniqueSymbolsInColumn.add(field.get(elementNumber));
+                elementNumber += size;
+            }
+            if (uniqueSymbolsInColumn.size() == 1 && !uniqueSymbolsInColumn.contains('A')) {
                 result = true;
-                if (winnerSymbol == 'x' || winnerSymbol == 'X') winnerOfTheGame = "игрок";
-                if (winnerSymbol == '0' ) winnerOfTheGame = "компьютер";
+                if (uniqueSymbolsInColumn.contains('0')) winnerOfTheGame = "компьютер (cтолбец)";
+                if (uniqueSymbolsInColumn.contains('x') || uniqueSymbolsInColumn.contains('X'))
+                    winnerOfTheGame = "игрок (cтолбец)";
             }
         }
         return result;
@@ -73,15 +86,29 @@ public enum Playground {
 
     public boolean checkTheDiagonalsForWinner(char winnerSymbol) {
         boolean result = false;
-        for (int i = 1; i < 3; i++) {
-            int j = 1;
-            if (field.get(j) == winnerSymbol && field.get(j+size+1) == winnerSymbol && field.get(j+size+size+2) == winnerSymbol) {
-                result = true;
-                if (winnerSymbol == 'x' || winnerSymbol == 'X') winnerOfTheGame = "игрок";
-                if (winnerSymbol == '0' ) winnerOfTheGame = "компьютер";
-            }
-            j+=2;
+        Set<Character> uniqueSymbolsInDiagonal = new HashSet<>();
+        for (int i = 1; i <= field.size(); i = i + size + 1) {
+            uniqueSymbolsInDiagonal.add(field.get(i));
         }
+        if (uniqueSymbolsInDiagonal.size() == 1 && !uniqueSymbolsInDiagonal.contains('A')) {
+            result = true;
+            if (uniqueSymbolsInDiagonal.contains('0')) winnerOfTheGame = "компьютер (диагональ)";
+            if (uniqueSymbolsInDiagonal.contains('x') || uniqueSymbolsInDiagonal.contains('X'))
+                winnerOfTheGame = "игрок (диагональ)";
+        }
+
+        uniqueSymbolsInDiagonal.clear();
+
+        for (int i = size; i <= field.size() - size + 1; i = i + size - 1) {
+            uniqueSymbolsInDiagonal.add(field.get(i));
+        }
+        if (uniqueSymbolsInDiagonal.size() == 1 && !uniqueSymbolsInDiagonal.contains('A')) {
+            result = true;
+            if (uniqueSymbolsInDiagonal.contains('0')) winnerOfTheGame = "компьютер (диагональ)";
+            if (uniqueSymbolsInDiagonal.contains('x') || uniqueSymbolsInDiagonal.contains('X'))
+                winnerOfTheGame = "игрок (диагональ)";
+        }
+
         return result;
     }
 

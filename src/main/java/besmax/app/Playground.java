@@ -47,27 +47,49 @@ public enum Playground {
          }
     }
 
-    public boolean doWeHaveWinner(char userSymbol) {
+    public boolean checkTheRowsForWinner(char winnerSymbol) {
         boolean result = false;
-        List<Integer> winnerPositions = new ArrayList<>();
-        field.forEach((key, val) -> {
-            if (val.equals(userSymbol) || val.equals(userSymbol)) winnerPositions.add(key);
-        });
-
-        if (winnerPositions.size() < size) result = false;
-        else if ( (winnerPositions.contains(1) && winnerPositions.contains(2) && winnerPositions.contains(3)) ||
-                (winnerPositions.contains(4) && winnerPositions.contains(5) && winnerPositions.contains(6)) ||
-                (winnerPositions.contains(7) && winnerPositions.contains(8) && winnerPositions.contains(9)) ||
-                (winnerPositions.contains(1) && winnerPositions.contains(4) && winnerPositions.contains(7)) ||
-                (winnerPositions.contains(2) && winnerPositions.contains(5) && winnerPositions.contains(8)) ||
-                (winnerPositions.contains(3) && winnerPositions.contains(6) && winnerPositions.contains(9)) ||
-                (winnerPositions.contains(1) && winnerPositions.contains(5) && winnerPositions.contains(9)) ||
-                (winnerPositions.contains(3) && winnerPositions.contains(5) && winnerPositions.contains(7)) ) {
-            if (userSymbol == 'x' || userSymbol == 'X') winnerOfTheGame = "игрок";
-            if (userSymbol == '0' ) winnerOfTheGame = "компьютер";
-            result = true;
+        for (int i = 1; i <= field.size(); i += size) {
+            if (field.get(i) == winnerSymbol && field.get(i+1) == winnerSymbol && field.get(i+2) == winnerSymbol) {
+                result = true;
+                if (winnerSymbol == 'x' || winnerSymbol == 'X') winnerOfTheGame = "игрок";
+                if (winnerSymbol == '0' ) winnerOfTheGame = "компьютер";
+            }
         }
         return result;
+    }
+
+    public boolean checkTheColumnsForWinner(char winnerSymbol) {
+        boolean result = false;
+        for (int i = 1; i <= size; i ++) {
+            if (field.get(i) == winnerSymbol && field.get(i+size) == winnerSymbol && field.get(i+size+size) == winnerSymbol) {
+                result = true;
+                if (winnerSymbol == 'x' || winnerSymbol == 'X') winnerOfTheGame = "игрок";
+                if (winnerSymbol == '0' ) winnerOfTheGame = "компьютер";
+            }
+        }
+        return result;
+    }
+
+    public boolean checkTheDiagonalsForWinner(char winnerSymbol) {
+        boolean result = false;
+        for (int i = 1; i < 3; i++) {
+            int j = 1;
+            if (field.get(j) == winnerSymbol && field.get(j+size+1) == winnerSymbol && field.get(j+size+size+2) == winnerSymbol) {
+                result = true;
+                if (winnerSymbol == 'x' || winnerSymbol == 'X') winnerOfTheGame = "игрок";
+                if (winnerSymbol == '0' ) winnerOfTheGame = "компьютер";
+            }
+            j+=2;
+        }
+        return result;
+    }
+
+    public boolean doWeHaveWinner(char winnerSymbol) {
+        if (checkTheRowsForWinner(winnerSymbol)) return true;
+        if (checkTheColumnsForWinner(winnerSymbol)) return true;
+        if (checkTheDiagonalsForWinner(winnerSymbol)) return true;
+        return false;
     }
 
     public void setSize(int size) {

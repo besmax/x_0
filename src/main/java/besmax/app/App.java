@@ -16,7 +16,7 @@ public class App {
 
     public void run() {
         prepareField(setSizeOfField());
-        for (int i = 1; i <= playground.getSize()*playground.getSize() / 2; i++) {
+        for (int i = 1; i <= playground.getSize()*playground.getSize() / 2 + 1; i++) {
             console.print("Введите номер ячейки для хода");
             makeUserMove(console.readNumber());
             if (playground.doWeHaveWinner(userSymbol)) {
@@ -26,7 +26,7 @@ public class App {
             }
             console.print(playground.showCurrentPlayground());
             makeComputerMove();
-            if (playground.doWeHaveWinner(userSymbol)) {
+            if (playground.doWeHaveWinner(computerSymbol)) {
                 console.print("В этой игре победил: " + playground.getWinnerOfTheGame());
                 console.print(playground.showCurrentPlayground());
                 break;

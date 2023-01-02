@@ -22,16 +22,9 @@ public class App {
             console.printFromFile("input_cell");
             while (true) {
                 cellNumberForMove = checkInputNumber();
-                if (cellNumberForMove != 0) break;
-                console.printFromFile("input_wrong_number");
+                if (cellNumberForMove != 0 && makeUserMove(cellNumberForMove)) break;
+                if (cellNumberForMove == 0) console.printFromFile("input_wrong_number");
             }
-
-
-            makeUserMove(cellNumberForMove); //тогда нужно выбрать другую ячейку
-
-
-
-
             if (playground.doWeHaveWinner(userSymbol)) {
                 console.print("В этой игре победил: " + playground.getWinnerOfTheGame());
                 console.print(playground.showCurrentPlayground());
@@ -62,13 +55,16 @@ public class App {
         console.print(playground.showCurrentPlayground());
     }
 
-    public void makeUserMove(int positionNumber) {
+    public boolean makeUserMove(int positionNumber) {
+        boolean result = false;
         if (playground.occupyPositionOnTheField(positionNumber, userSymbol)) {
+            result = true;
             console.printFromFile("output_move_ok");
         }
         else {
             console.printFromFile("input_wrong_cell");
         }
+        return result;
     }
 
     public void makeComputerMove() {

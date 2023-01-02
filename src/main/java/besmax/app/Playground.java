@@ -12,7 +12,7 @@ public enum Playground {
     private Map<Integer, Character> field;
 
     public void prepareFieldForGame() {
-        winnerOfTheGame = "No one";
+        winnerOfTheGame = "Никто, ничья";
         field = new HashMap<>();
         for (int i = 1; i <= size*size; i++)
         field.put(i, 'A');
@@ -117,6 +117,7 @@ public enum Playground {
         if (checkTheRowsForWinner(winnerSymbol)) return true;
         if (checkTheColumnsForWinner(winnerSymbol)) return true;
         if (checkTheDiagonalsForWinner(winnerSymbol)) return true;
+        if (!field.containsValue('A')) return true;
         return false;
     }
 

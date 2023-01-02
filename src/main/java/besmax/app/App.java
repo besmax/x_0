@@ -11,8 +11,13 @@ public class App {
     private char userSymbol = 'X';
     private char computerSymbol = '0';
 
-    private Console console = new DefaultConsole();
-    Playground playground = Playground.PLAYGROUND_INSTANCE;
+    private Console console;
+    Playground playground;
+
+    public App(Console console, Playground playground) {
+        this.console = console;
+        this.playground = playground;
+    }
 
     public void run() {
         console.printFromFile("output_rules");
@@ -69,7 +74,7 @@ public class App {
 
     public void makeComputerMove() {
         console.printFromFile("output_my_turn");
-        while (!playground.occupyPositionOnTheField(new Random().nextInt(9) + 1, computerSymbol));
+        while (!playground.occupyPositionOnTheField(new Random().nextInt(playground.getSize()*playground.getSize()) + 1, computerSymbol));
         console.print(playground.showCurrentPlayground());
     }
 

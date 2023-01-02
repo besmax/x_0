@@ -38,6 +38,7 @@ public enum Playground {
     }
 
     public boolean occupyPositionOnTheField (int positionNumber, char userOrNot) {
+        if (positionNumber == 0) return false;
          if (field.get(positionNumber) == 'A') {
              field.put(positionNumber, userOrNot);
              return true;

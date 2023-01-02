@@ -1,8 +1,16 @@
 package besmax.console;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.Scanner;
 
 public class DefaultConsole implements Console {
+
+    private Properties properties;
+
     @Override
     public void print(String text) {
         System.out.println(text);
@@ -16,4 +24,18 @@ public class DefaultConsole implements Console {
     public String readText() {
         return new Scanner(System.in).nextLine();
     }
+
+    @Override
+    public void printFromFile(String stringPropertyName) {
+        File file = new File("src/main/resources/strings.properties");
+
+        Properties properties = new Properties();
+        try {
+            properties.load(new FileReader(file));
+        } catch (IOException e) {
+            System.out.println("Ошибка чтения файла");
+        }
+        System.out.println(properties.getProperty(stringPropertyName));
+    }
+
 }

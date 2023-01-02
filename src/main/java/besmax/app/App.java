@@ -15,10 +15,23 @@ public class App {
     Playground playground = Playground.PLAYGROUND_INSTANCE;
 
     public void run() {
+        console.printFromFile("output_rules");
         prepareField(setSizeOfField());
         for (int i = 1; i <= playground.getSize()*playground.getSize() / 2 + 1; i++) {
-            console.print("Введите номер ячейки для хода");
-            makeUserMove(console.readNumber());
+            int cellNumberForMove = 0;
+            console.printFromFile("input_cell");
+            while (true) {
+                cellNumberForMove = checkInputNumber();
+                if (cellNumberForMove != 0) break;
+                console.printFromFile("input_wrong_number");
+            }
+
+
+            makeUserMove(cellNumberForMove); //тогда нужно выбрать другую ячейку
+
+
+
+
             if (playground.doWeHaveWinner(userSymbol)) {
                 console.print("В этой игре победил: " + playground.getWinnerOfTheGame());
                 console.print(playground.showCurrentPlayground());
@@ -35,18 +48,11 @@ public class App {
     }
 
     public int setSizeOfField() {
-        console.print("Введите желаемый размер поля, но не менее 3. Например, 3 - для создания поля 3х3");
         int inputSize = 0;
-        while (true) {
-            try {
-                inputSize = console.readNumber();
-                break;
-
-            } catch (InputMismatchException e) {
-                console.print("Неккоректно введено число, попробуйте ещё раз");
-            }
+        while (inputSize < 3) {
+            console.printFromFile("input_field");
+            inputSize = checkInputNumber();
         }
-        if (inputSize < 3) setSizeOfField();
         return inputSize;
     }
 
@@ -58,17 +64,30 @@ public class App {
 
     public void makeUserMove(int positionNumber) {
         if (playground.occupyPositionOnTheField(positionNumber, userSymbol)) {
-            console.print("Ваш ход засчитан");
+            console.printFromFile("output_move_ok");
         }
         else {
-            console.print("Смотри куда ставишь, клетка занята!");
+            console.printFromFile("input_wrong_cell");
         }
     }
 
     public void makeComputerMove() {
-        console.print("Мой ход");
+        console.printFromFile("output_my_turn");
         while (!playground.occupyPositionOnTheField(new Random().nextInt(9) + 1, computerSymbol));
         console.print(playground.showCurrentPlayground());
+    }
+
+    public int checkInputNumber() {
+        int result = 0;
+        while (true) {
+            try {
+                result = console.readNumber();
+                break;
+            } catch (InputMismatchException e) {
+                console.printFromFile("input_wrong_number");
+            }
+        }
+        return result;
     }
 
 }

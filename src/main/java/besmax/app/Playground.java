@@ -132,4 +132,8 @@ public enum Playground {
     public String getWinnerOfTheGame() {
         return winnerOfTheGame;
     }
+
+    public Map<Integer, Character> getField() {
+        return field;
+    }
 }

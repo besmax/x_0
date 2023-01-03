@@ -13,7 +13,6 @@ import static org.mockito.Mockito.verify;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
 
 import besmax.console.Console;
 import besmax.console.DefaultConsole;

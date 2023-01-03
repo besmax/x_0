@@ -27,11 +27,13 @@ public class App {
             console.printFromFile("input_cell");
             while (true) {
                 cellNumberForMove = checkInputNumber();
-                if (cellNumberForMove != 0 && makeUserMove(cellNumberForMove)) break;
+                if (cellNumberForMove != 0 && cellNumberForMove <= playground.getSize() * playground.getSize() && makeUserMove(cellNumberForMove)) break;
                 if (cellNumberForMove == 0) console.printFromFile("input_wrong_number");
+                if (cellNumberForMove > playground.getSize() * playground.getSize()) console.printFromFile("input_wrong_number");
             }
             if (playground.doWeHaveWinner(userSymbol)) {
-                console.print("В этой игре победил: " + playground.getWinnerOfTheGame());
+                console.printFromFile("output_winner");
+                console.print(playground.getWinnerOfTheGame());
                 console.print(playground.showCurrentPlayground());
                 break;
             }

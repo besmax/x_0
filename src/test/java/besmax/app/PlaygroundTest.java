@@ -59,7 +59,7 @@ public class PlaygroundTest {
         playground.occupyPositionOnTheField(3, 'X');
 
         assertTrue(playground.checkTheRowsForWinner('X'));
-        assertEquals("игрок (строка)".length(), playground.getWinnerOfTheGame().length());
+        assertEquals("player (row)".length(), playground.getWinnerOfTheGame().length());
     }
 
     @Test
@@ -69,7 +69,7 @@ public class PlaygroundTest {
         playground.occupyPositionOnTheField(7, 'X');
 
         assertTrue(playground.checkTheColumnsForWinner('X'));
-        assertEquals("игрок (cтолбец)".length(), playground.getWinnerOfTheGame().length());
+        assertEquals("player (column)", playground.getWinnerOfTheGame());
     }
 
     @Test
@@ -79,7 +79,7 @@ public class PlaygroundTest {
         playground.occupyPositionOnTheField(9, 'X');
 
         assertTrue(playground.checkTheDiagonalsForWinner('X'));
-        assertEquals("игрок (диагональ)".length(), playground.getWinnerOfTheGame().length());
+        assertEquals("player (diagonal)".length(), playground.getWinnerOfTheGame().length());
     }
 
     @Test
@@ -89,7 +89,7 @@ public class PlaygroundTest {
         playground.occupyPositionOnTheField(9, '0');
 
         assertTrue(playground.doWeHaveWinner('0'));
-        assertEquals("компьютер (диагональ)".length(), playground.getWinnerOfTheGame().length());
+        assertEquals("computer (diagonal)".length(), playground.getWinnerOfTheGame().length());
     }
 
     @Test
@@ -99,5 +99,13 @@ public class PlaygroundTest {
         playground.occupyPositionOnTheField(9, 'X');
 
         assertFalse(playground.doWeHaveWinner('0'));
+    }
+
+    @Test
+    void setSizeDoesNotTakeNumberGreaterThanNine() {
+        playground.setSize(76);
+
+        assertEquals(playground.getSize(), 9);
+        playground.setSize(3);
     }
 }

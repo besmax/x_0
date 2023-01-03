@@ -12,7 +12,7 @@ public enum Playground {
     private Map<Integer, Character> field;
 
     public void prepareFieldForGame() {
-        winnerOfTheGame = "Никто, ничья";
+        winnerOfTheGame = "No one, it's a draw";
         field = new HashMap<>();
         for (int i = 1; i <= size*size; i++)
         field.put(i, 'A');
@@ -26,10 +26,16 @@ public enum Playground {
                 if (elementNumber < 10) result.append(" ");
                 if (field.get(elementNumber) == 'A') result.append(elementNumber)
                         .append(" ");
-                else if (field.get(elementNumber) == '0') result.append('0')
-                        .append(" ");
-                else if (field.get(elementNumber) == 'x' || field.get(elementNumber) == 'X') result.append('X')
-                        .append(" ");
+                else if (field.get(elementNumber) == '0') {
+                    if (elementNumber > 9) result.append(" ");
+                    result.append('0')
+                            .append(" ");
+                }
+                else if (field.get(elementNumber) == 'x' || field.get(elementNumber) == 'X') {
+                    if (elementNumber > 9) result.append(" ");
+                    result.append('X')
+                            .append(" ");
+                }
                 elementNumber++;
             }
             result.append(System.lineSeparator());
@@ -59,8 +65,8 @@ public enum Playground {
                }
             if (uniqueSymbolsInRow.size() == 1 && !uniqueSymbolsInRow.contains('A')) {
                 result = true;
-                if (uniqueSymbolsInRow.contains('0')) winnerOfTheGame = "компьютер (строка)";
-                if (uniqueSymbolsInRow.contains('x') || uniqueSymbolsInRow.contains('X')) winnerOfTheGame = "игрок (строка)";
+                if (uniqueSymbolsInRow.contains('0')) winnerOfTheGame = "computer (row)";
+                if (uniqueSymbolsInRow.contains('x') || uniqueSymbolsInRow.contains('X')) winnerOfTheGame = "player (row)";
            }
         }
         return result;
@@ -77,9 +83,9 @@ public enum Playground {
             }
             if (uniqueSymbolsInColumn.size() == 1 && !uniqueSymbolsInColumn.contains('A')) {
                 result = true;
-                if (uniqueSymbolsInColumn.contains('0')) winnerOfTheGame = "компьютер (cтолбец)";
+                if (uniqueSymbolsInColumn.contains('0')) winnerOfTheGame = "computer (column)";
                 if (uniqueSymbolsInColumn.contains('x') || uniqueSymbolsInColumn.contains('X'))
-                    winnerOfTheGame = "игрок (cтолбец)";
+                    winnerOfTheGame = "player (column)";
             }
         }
         return result;
@@ -93,9 +99,9 @@ public enum Playground {
         }
         if (uniqueSymbolsInDiagonal.size() == 1 && !uniqueSymbolsInDiagonal.contains('A')) {
             result = true;
-            if (uniqueSymbolsInDiagonal.contains('0')) winnerOfTheGame = "компьютер (диагональ)";
+            if (uniqueSymbolsInDiagonal.contains('0')) winnerOfTheGame = "computer (diagonal)";
             if (uniqueSymbolsInDiagonal.contains('x') || uniqueSymbolsInDiagonal.contains('X'))
-                winnerOfTheGame = "игрок (диагональ)";
+                winnerOfTheGame = "player (diagonal)";
         }
 
         uniqueSymbolsInDiagonal.clear();
@@ -105,9 +111,9 @@ public enum Playground {
         }
         if (uniqueSymbolsInDiagonal.size() == 1 && !uniqueSymbolsInDiagonal.contains('A')) {
             result = true;
-            if (uniqueSymbolsInDiagonal.contains('0')) winnerOfTheGame = "компьютер (диагональ)";
+            if (uniqueSymbolsInDiagonal.contains('0')) winnerOfTheGame = "computer (diagonal)";
             if (uniqueSymbolsInDiagonal.contains('x') || uniqueSymbolsInDiagonal.contains('X'))
-                winnerOfTheGame = "игрок (диагональ)";
+                winnerOfTheGame = "player (diagonal)";
         }
 
         return result;
@@ -122,7 +128,8 @@ public enum Playground {
     }
 
     public void setSize(int size) {
-        this.size = size;
+        if (size <= 9) this.size = size;
+        else this.size = 9;
     }
 
     public int getSize() {

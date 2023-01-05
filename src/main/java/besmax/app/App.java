@@ -31,19 +31,10 @@ public class App {
                 if (cellNumberForMove == 0) console.printFromFile("input_wrong_number");
                 if (cellNumberForMove > playground.getSize() * playground.getSize()) console.printFromFile("input_wrong_number");
             }
-            if (playground.doWeHaveWinner(userSymbol)) {
-                console.printFromFile("output_winner");
-                console.print(playground.getWinnerOfTheGame());
-                console.print(playground.showCurrentPlayground());
-                break;
-            }
+            if (checkForWinner(userSymbol)) break;
             console.print(playground.showCurrentPlayground());
             makeComputerMove();
-            if (playground.doWeHaveWinner(computerSymbol)) {
-                console.print("В этой игре победил: " + playground.getWinnerOfTheGame());
-                console.print(playground.showCurrentPlayground());
-                break;
-            }
+            if (checkForWinner(computerSymbol)) break;
         }
     }
 
@@ -91,6 +82,18 @@ public class App {
             }
         }
         return result;
+    }
+
+
+    public boolean checkForWinner(char winnerSymbol) {
+        if (playground.doWeHaveWinner(winnerSymbol)) {
+            console.print("В этой игре победил: " + playground.getWinnerOfTheGame());
+            console.print(playground.showCurrentPlayground());
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
 }

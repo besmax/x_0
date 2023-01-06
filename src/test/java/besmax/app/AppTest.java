@@ -89,4 +89,28 @@ public class AppTest {
 
         verify(consoleForTest, times(2)).printFromFile("input_field");
     }
+
+    @Test
+    void checkForWinnerReturnsTrueWhenWinner() {
+        doNothing().when(consoleForTest).print(anyString());
+        Mockito.when(playgroundForTest.showCurrentPlayground()).thenReturn("true");
+        Mockito.when(playgroundForTest.doWeHaveWinner(anyChar())).thenReturn(true);
+
+        boolean actual = appForTest.checkForWinner('0');
+
+        assertEquals(true, actual);
+        verify(consoleForTest, times(2)).print(anyString());
+        verify(playgroundForTest, times(1)).showCurrentPlayground();
+        verify(playgroundForTest, times(1)).doWeHaveWinner(anyChar());
+    }
+
+    @Test
+    void checkForWinnerReturnsTrueWhenNoWinner() {
+        Mockito.when(playgroundForTest.doWeHaveWinner(anyChar())).thenReturn(false);
+
+        boolean actual = appForTest.checkForWinner('0');
+
+        assertEquals(false, actual);
+        verify(playgroundForTest, times(1)).doWeHaveWinner(anyChar());
+    }
 }

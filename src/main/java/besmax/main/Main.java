@@ -8,10 +8,6 @@ import besmax.console.DefaultConsole;
 public class Main {
     public static void main(String[] args) {
        App app = new App(new DefaultConsole(), Playground.PLAYGROUND_INSTANCE);
-        //app.run();
-
-        new DefaultConsole().printFromFile("213123");
-
-
+        app.run();
     }
 }

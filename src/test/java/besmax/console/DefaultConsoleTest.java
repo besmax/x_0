@@ -29,4 +29,22 @@ public class DefaultConsoleTest {
         System.setIn(System.in);
     }
 
+    @Test
+    void consolePrintFromFileCorrectProperties() {
+        OutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+        consoleTest.printFromFile("input_cell");
+
+        assertEquals(out.toString(), ("Введите номер ячейки для хода" + System.lineSeparator()));
+    }
+
+    @Test
+    void consolePrintFromFileWithIncorrectKeyProperty() {
+        OutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+        consoleTest.printFromFile("thxfgh");
+
+        assertEquals(out.toString(), ("Ошибка печати из файла, в файле нет такого ключа" + System.lineSeparator()));
+    }
+
 }

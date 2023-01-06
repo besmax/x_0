@@ -35,7 +35,8 @@ public class DefaultConsole implements Console {
         } catch (IOException e) {
             System.out.println("Ошибка чтения файла");
         }
-        System.out.println(properties.getProperty(stringPropertyName));
+        if (properties.getProperty(stringPropertyName) == null) System.out.println("Ошибка печати из файла, в файле нет такого ключа");
+        else System.out.println(properties.getProperty(stringPropertyName));
     }
 
 }

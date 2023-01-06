@@ -12,7 +12,7 @@ public class App {
     private char computerSymbol = '0';
 
     private Console console;
-    Playground playground;
+    private Playground playground;
 
     public App(Console console, Playground playground) {
         this.console = console;

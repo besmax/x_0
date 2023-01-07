@@ -8,6 +8,8 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 
@@ -107,5 +109,20 @@ public class PlaygroundTest {
 
         assertEquals(playground.getSize(), 9);
         playground.setSize(3);
+    }
+
+    @Test
+    void findPositionsWithSymbolReturnsCorrectList() {
+        playground.occupyPositionOnTheField(1, 'x');
+        playground.occupyPositionOnTheField(2, 'x');
+        playground.occupyPositionOnTheField(7, 'x');
+        playground.occupyPositionOnTheField(3, 'x');
+        List<Integer> expected = new ArrayList<Integer>();
+        expected.add(1);
+        expected.add(2);
+        expected.add(3);
+        expected.add(7);
+
+        assertEquals(expected, playground.findPositionsWithSymbol('x'));
     }
 }

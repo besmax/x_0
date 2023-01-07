@@ -17,6 +17,9 @@ import org.mockito.Mockito;
 import besmax.console.Console;
 import besmax.console.DefaultConsole;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class AppTest {
@@ -36,7 +39,10 @@ public class AppTest {
 
     @Test
     void makeComputerMovePrints() {
+        List<Integer> listOfPositions = new ArrayList<>();
+        listOfPositions.add(2);
         doNothing().when(consoleForTest).printFromFile(anyString());
+        Mockito.when(playgroundForTest.findPositionsWithSymbol(anyChar())).thenReturn(listOfPositions);
         Mockito.when(playgroundForTest.occupyPositionOnTheField(anyInt(), anyChar())).thenReturn(true);
         doNothing().when(consoleForTest).print(anyString());
         Mockito.when(playgroundForTest.showCurrentPlayground()).thenReturn("xxx");

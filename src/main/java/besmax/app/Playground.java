@@ -127,6 +127,14 @@ public enum Playground {
         return false;
     }
 
+    public List<Integer> findPositionsWithSymbol(char symbol) {
+        List<Integer> positions = new ArrayList();
+        field.forEach((k, v) -> {
+            if (v == symbol)  positions.add(k);
+        });
+        return positions;
+    }
+
     public void setSize(int size) {
         if (size <= 9) this.size = size;
         else this.size = 9;
@@ -143,4 +151,5 @@ public enum Playground {
     public Map<Integer, Character> getField() {
         return field;
     }
+
 }

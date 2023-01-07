@@ -4,6 +4,7 @@ import besmax.console.Console;
 import besmax.console.DefaultConsole;
 
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Random;
 
 public class App {
@@ -67,7 +68,8 @@ public class App {
 
     public void makeComputerMove() {
         console.printFromFile("output_my_turn");
-        while (!playground.occupyPositionOnTheField(new Random().nextInt(playground.getSize()*playground.getSize()) + 1, computerSymbol));
+        List<Integer> availablePositions = playground.findPositionsWithSymbol('A');
+        while (!playground.occupyPositionOnTheField(availablePositions.get(new Random().nextInt(availablePositions.size())), computerSymbol));
         console.print(playground.showCurrentPlayground());
     }
 
@@ -95,5 +97,7 @@ public class App {
             return false;
         }
     }
+
+
 
 }

@@ -23,20 +23,20 @@ public class Game {
 
     public void play() {
         console.print(playground.showCurrentPlayground());
-        while (!playing) {
+        while (true) {
             if (human.getSymbol() == '0') {
                 computer.makeMove(1);
-                playing = playground.doWeHaveWinner(computer.getSymbol());
+                if (playground.doWeHaveWinner(computer.getSymbol())) break;
                 human.makeMove(getPositionNumberFromUser());
                 console.print(playground.showCurrentPlayground());
-                playing = playground.doWeHaveWinner(human.getSymbol());
+                if (playground.doWeHaveWinner(human.getSymbol())) break;
             }
             else {
                 human.makeMove(getPositionNumberFromUser());
                 console.print(playground.showCurrentPlayground());
-                playing = playground.doWeHaveWinner(human.getSymbol());
+                if (playground.doWeHaveWinner(human.getSymbol())) break;
                 computer.makeMove(1);
-                playing = playground.doWeHaveWinner(computer.getSymbol());
+                if (playground.doWeHaveWinner(computer.getSymbol())) break;
             }
         }
         console.printFromFile("output_winner");

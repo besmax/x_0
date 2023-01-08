@@ -20,6 +20,8 @@ public class PlaygroundTest {
     @BeforeEach
     void prepareFieldForATests() {
         playground.prepareFieldForGame();
+        playground.setComputerSymbol('0');
+        playground.setUserSymbol('X');
     }
 
     @AfterAll
@@ -61,6 +63,7 @@ public class PlaygroundTest {
         playground.occupyPositionOnTheField(3, 'X');
 
         assertTrue(playground.checkTheRowsForWinner('X'));
+        System.out.println(playground.getWinnerOfTheGame());
         assertEquals("player (row)".length(), playground.getWinnerOfTheGame().length());
     }
 

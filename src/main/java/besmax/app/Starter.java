@@ -4,6 +4,7 @@ import besmax.console.Console;
 import besmax.player.Computer;
 import besmax.player.Human;
 import besmax.player.Player;
+import besmax.player.SmartComputer;
 
 public class Starter {
 
@@ -29,7 +30,13 @@ public class Starter {
         if (userSymbol == '0') computerSymbol = 'X';
         else computerSymbol = '0';
         playground.setComputerSymbol(computerSymbol);
-        Player computer = new Computer(computerSymbol, console, playground);
+        Player computer;
+        if (playground.getSize() == 3) {
+            computer = new SmartComputer(computerSymbol, console, playground);
+        }
+        else {
+            computer = new Computer(computerSymbol, console, playground);
+        }
         Game game = new Game(computer, human, playground, console, inputChecker);
         game.play();
     }

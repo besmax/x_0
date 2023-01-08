@@ -29,9 +29,7 @@ public class ComputerTest {
         List<Integer> availablePositions = new ArrayList<>();
         availablePositions.add(4);
         availablePositions.add(5);
-        availablePositions.add(6);
-        availablePositions.add(9);
-        Mockito.when(playgroundForTest.findPositionsWithSymbol('A')).thenReturn(availablePositions);
+        Mockito.when(playgroundForTest.findPositionsWithSymbol(anyChar())).thenReturn(availablePositions);
         Mockito.when(playgroundForTest.occupyPositionOnTheField(anyInt(), anyChar())).thenReturn(true);
         Mockito.when(playgroundForTest.showCurrentPlayground()).thenReturn("ararara");
         doNothing().when(consoleForTest).print(anyString());

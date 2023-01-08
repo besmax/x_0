@@ -8,8 +8,6 @@ import besmax.console.Console;
 
 public class Computer extends Player {
 
-    private Playground playground;
-
     public Computer(char symbol, Console console, Playground playground) {
         super(symbol, console, playground);
     }

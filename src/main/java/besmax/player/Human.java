@@ -5,11 +5,10 @@ import besmax.console.Console;
 
 public class Human extends Player {
 
-    private Playground playground = Playground.PLAYGROUND_INSTANCE;
-
-    public Human(char symbol, Console console) {
-        super(symbol, console);
+    public Human(char symbol, Console console, Playground playground) {
+        super(symbol, console, playground);
     }
+
 
     @Override
     public boolean makeMove(int positionNumber) {

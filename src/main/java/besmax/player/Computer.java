@@ -8,10 +8,10 @@ import besmax.console.Console;
 
 public class Computer extends Player {
 
-    private Playground playground = Playground.PLAYGROUND_INSTANCE;
+    private Playground playground;
 
-    public Computer(char symbol, Console console) {
-        super(symbol, console);
+    public Computer(char symbol, Console console, Playground playground) {
+        super(symbol, console, playground);
     }
 
     @Override

@@ -26,10 +26,10 @@ public class Starter {
         playground.setSize(getSizeOfFieldFromUser());
         playground.prepareFieldForGame();
         userSymbol = getFromUserSymbol();
-        Player human = new Human(userSymbol, console);
+        Player human = new Human(userSymbol, console, playground);
         if (userSymbol == '0') computerSymbol = 'X';
         else computerSymbol = '0';
-        Player computer = new Computer(computerSymbol, console);
+        Player computer = new Computer(computerSymbol, console, playground);
         Game game = new Game(computer, human, playground, console, inputChecker);
         game.play();
     }

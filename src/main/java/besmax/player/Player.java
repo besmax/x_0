@@ -7,11 +7,12 @@ public abstract class Player {
 
     protected char symbol;
     protected Console console;
+    protected Playground playground;
 
-    public Player(char symbol, Console console) {
+    public Player(char symbol, Console console, Playground playground) {
         this.symbol = symbol;
         this.console = console;
-        Playground playground = Playground.PLAYGROUND_INSTANCE;
+        this.playground =  playground;
     }
 
     public abstract boolean makeMove(int positionNumber);

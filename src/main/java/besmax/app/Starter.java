@@ -1,7 +1,5 @@
 package besmax.app;
 
-import java.util.InputMismatchException;
-
 import besmax.console.Console;
 import besmax.player.Computer;
 import besmax.player.Human;
@@ -26,9 +24,11 @@ public class Starter {
         playground.setSize(getSizeOfFieldFromUser());
         playground.prepareFieldForGame();
         userSymbol = getFromUserSymbol();
+        playground.setUserSymbol(userSymbol);
         Player human = new Human(userSymbol, console, playground);
         if (userSymbol == '0') computerSymbol = 'X';
         else computerSymbol = '0';
+        playground.setComputerSymbol(computerSymbol);
         Player computer = new Computer(computerSymbol, console, playground);
         Game game = new Game(computer, human, playground, console, inputChecker);
         game.play();

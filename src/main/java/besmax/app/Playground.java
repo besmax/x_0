@@ -6,9 +6,9 @@ public enum Playground {
     PLAYGROUND_INSTANCE;
 
     private int size = 3;
-
     private String winnerOfTheGame;
-
+    private char userSymbol = '#';
+    private char computerSymbol = '#';
     private Map<Integer, Character> field;
 
     public void prepareFieldForGame() {
@@ -65,8 +65,8 @@ public enum Playground {
                }
             if (uniqueSymbolsInRow.size() == 1 && !uniqueSymbolsInRow.contains('A')) {
                 result = true;
-                if (uniqueSymbolsInRow.contains('0')) winnerOfTheGame = "computer (row)";
-                if (uniqueSymbolsInRow.contains('x') || uniqueSymbolsInRow.contains('X')) winnerOfTheGame = "player (row)";
+                if (uniqueSymbolsInRow.contains(computerSymbol)) winnerOfTheGame = "computer (row)";
+                if (uniqueSymbolsInRow.contains(userSymbol)) winnerOfTheGame = "player (row)";
            }
         }
         return result;
@@ -83,8 +83,8 @@ public enum Playground {
             }
             if (uniqueSymbolsInColumn.size() == 1 && !uniqueSymbolsInColumn.contains('A')) {
                 result = true;
-                if (uniqueSymbolsInColumn.contains('0')) winnerOfTheGame = "computer (column)";
-                if (uniqueSymbolsInColumn.contains('x') || uniqueSymbolsInColumn.contains('X'))
+                if (uniqueSymbolsInColumn.contains(computerSymbol)) winnerOfTheGame = "computer (column)";
+                if (uniqueSymbolsInColumn.contains(userSymbol))
                     winnerOfTheGame = "player (column)";
             }
         }
@@ -99,8 +99,8 @@ public enum Playground {
         }
         if (uniqueSymbolsInDiagonal.size() == 1 && !uniqueSymbolsInDiagonal.contains('A')) {
             result = true;
-            if (uniqueSymbolsInDiagonal.contains('0')) winnerOfTheGame = "computer (diagonal)";
-            if (uniqueSymbolsInDiagonal.contains('x') || uniqueSymbolsInDiagonal.contains('X'))
+            if (uniqueSymbolsInDiagonal.contains(computerSymbol)) winnerOfTheGame = "computer (diagonal)";
+            if (uniqueSymbolsInDiagonal.contains(userSymbol))
                 winnerOfTheGame = "player (diagonal)";
         }
 
@@ -111,8 +111,8 @@ public enum Playground {
         }
         if (uniqueSymbolsInDiagonal.size() == 1 && !uniqueSymbolsInDiagonal.contains('A')) {
             result = true;
-            if (uniqueSymbolsInDiagonal.contains('0')) winnerOfTheGame = "computer (diagonal)";
-            if (uniqueSymbolsInDiagonal.contains('x') || uniqueSymbolsInDiagonal.contains('X'))
+            if (uniqueSymbolsInDiagonal.contains(computerSymbol)) winnerOfTheGame = "computer (diagonal)";
+            if (uniqueSymbolsInDiagonal.contains(userSymbol))
                 winnerOfTheGame = "player (diagonal)";
         }
 
@@ -142,6 +142,18 @@ public enum Playground {
 
     public int getSize() {
         return size;
+    }
+
+    public char getUserSymbol() {
+        return userSymbol;
+    }
+
+    public void setUserSymbol(char userSymbol) {
+        this.userSymbol = userSymbol;
+    }
+
+    public void setComputerSymbol(char computerSymbol) {
+        this.computerSymbol = computerSymbol;
     }
 
     public String getWinnerOfTheGame() {

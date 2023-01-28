@@ -3,7 +3,7 @@ package besmax.console;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
-import java.math.BigInteger;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -20,8 +20,7 @@ public class DefaultConsoleTest {
     }
 
     @Test
-    void consoleReadInt() {
-       // InputStream input = new ByteArrayInputStream(BigInteger.valueOf(7).toByteArray());
+    void consoleReadTextReturnCorrectString() {
         InputStream input = new ByteArrayInputStream("7".getBytes());
         System.setIn(input);
         String actual = consoleTest.readText();
@@ -29,4 +28,23 @@ public class DefaultConsoleTest {
         assertEquals("7", actual);
         System.setIn(System.in);
     }
+
+    @Test
+    void consolePrintFromFileCorrectProperties() {
+        OutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+        consoleTest.printFromFile("input_cell");
+
+        assertEquals(out.toString(), ("Введите номер ячейки для хода" + System.lineSeparator()));
+    }
+
+    @Test
+    void consolePrintFromFileWithIncorrectKeyProperty() {
+        OutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+        consoleTest.printFromFile("thxfgh");
+
+        assertEquals(out.toString(), ("Ошибка печати из файла, в файле нет такого ключа" + System.lineSeparator()));
+    }
+
 }
